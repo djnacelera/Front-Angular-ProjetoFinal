@@ -22,7 +22,8 @@
     "lib": [
       "ES2022",
       "dom"
-    ]
+    ],
+    "strictPropertyInitialization": false //tira a necessidade de iniciar todas as variaveis
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
