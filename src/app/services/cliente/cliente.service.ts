@@ -1,36 +1,36 @@
-import { Tokenretorno } from './../models/tokenretorno';
-import { Injectable } from '@angular/core';
 import {
   HttpClient,
   HttpErrorResponse,
   HttpHeaders,
 } from '@angular/common/http';
-import { TokenModel } from '../models/token_model';
-import { Observable, catchError, retry, throwError } from 'rxjs';
+import { Injectable, OnInit } from '@angular/core';
+import { Observable, throwError, retry, catchError, map } from 'rxjs';
+
+import { Cliente } from 'src/app/models/cliente';
 
 @Injectable({
   providedIn: 'root',
 })
-export class TokenService {
+export class ClienteService {
+  //Injetando Cliente para requisição e serviço de Token para as requisições.
   constructor(private httpClient: HttpClient) {}
-  url = 'https://localhost:7198/api/Token/autenticarAngular';
-  token = {
-    clienteId: 'abacaxi123',
-    clienteSecret: 'segredodoabacaxi',
-  } as TokenModel;
 
-  //Headers
-  httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
-  };
+  //Url da API
+  url = 'https://localhost:7198/api/Cliente/';
 
-  //Chamada para obter token
-  getToken(): Observable<Tokenretorno> {
+  getClienteByCPF(cpf: string, token: string): Observable<Cliente> {
+    debugger
     return this.httpClient
-      .post<Tokenretorno>(this.url, this.token, this.httpOptions)
+      .get<Cliente>(`${this.url}FiltrarPorCpf/${cpf}`, {
+        headers: new HttpHeaders({
+          Authorization: 'Bearer ' + token,
+          'Content-Type': 'application/json',
+        }),
+      })
       .pipe(retry(2), catchError(this.handleError));
   }
 
+  //Manuseio de erros
   handleError(error: HttpErrorResponse) {
     let errorMessage = '';
     if (error.error instanceof ErrorEvent) {

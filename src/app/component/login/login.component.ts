@@ -1,28 +1,35 @@
+import { TokenService } from './../../services/token.service';
+import { ClienteService } from 'src/app/services/cliente/cliente.service';
+import { Cliente } from './../../models/cliente';
 import { Component } from '@angular/core';
-import { TokenService } from 'src/app/services/token.service';
-import { TokenModel } from 'src/app/models/token_model';
-import { Tokenretorno } from 'src/app/models/tokenretorno';
-
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
-
-  constructor(private tokenService: TokenService) {}
-  tokenRecebido: Tokenretorno;
+  cliente: Cliente;
+  token: string;
+  constructor(
+    private tokenService: TokenService,
+    private clienteService: ClienteService
+  ) {}
 
   ngOnInit() {
-
+    this.GetCliente('111111111111');
   }
 
-
-  async getToken() {
-    (await this.tokenService.getToken()).subscribe(
-      (tokenRecebido: Tokenretorno) => {
-        this.tokenRecebido = tokenRecebido;
-      }
-    );
+  //Fazer o unsubscribe :D
+  GetCliente(cpf: string) {
+    debugger
+    this.tokenService.getToken().subscribe((tokenUser) => {
+      this.token = tokenUser.token;
+      this.clienteService
+        .getClienteByCPF(cpf, this.token)
+        .subscribe((cliente: Cliente) => {
+          this.cliente = cliente;
+          console.log(this.cliente);
+        });
+    });
   }
 }
