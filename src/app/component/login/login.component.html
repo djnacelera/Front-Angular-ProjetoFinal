@@ -1,1 +1,5 @@
-<p>login works!</p>
+<form (ngSubmit)="submitForm()">
+  <label for="cpf">CPF</label>
+  <input type="text" id="cpf" name="cpf" [(ngModel)]="cpf" />
+  <button type="submit">Entrar</button>
+</form>

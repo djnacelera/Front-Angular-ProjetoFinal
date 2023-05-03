@@ -3,10 +3,10 @@ import {
   HttpErrorResponse,
   HttpHeaders,
 } from '@angular/common/http';
-import { Injectable, OnInit } from '@angular/core';
-import { Observable, throwError, retry, catchError, map } from 'rxjs';
+import { Injectable } from '@angular/core';
+import { Observable, throwError, retry, catchError} from 'rxjs';
 
-import { Cliente } from 'src/app/models/cliente';
+import { Mesa } from 'src/app/models/mesa';
 
 @Injectable({
   providedIn: 'root',
@@ -16,12 +16,11 @@ export class ClienteService {
   constructor(private httpClient: HttpClient) {}
 
   //Url da API
-  url = 'https://localhost:7198/api/Cliente/';
+  url = 'https://localhost:7198/api/Mesa/';
 
-  getClienteByCPF(cpf: string, token: string): Observable<Cliente> {
-    debugger
+  getClienteByCPF(cpf: string, token: string): Observable<Mesa[]> {
     return this.httpClient
-      .get<Cliente>(`${this.url}FiltrarPorCpf/${cpf}`, {
+      .get<Mesa[]>(`${this.url}FiltrarPorCpf/${cpf}`, {
         headers: new HttpHeaders({
           Authorization: 'Bearer ' + token,
           'Content-Type': 'application/json',
