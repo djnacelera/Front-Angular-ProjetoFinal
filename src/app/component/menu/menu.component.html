@@ -1,0 +1,13 @@
+<section>
+  <div *ngFor="let item of pratos">
+    <div *ngIf="item.status">
+      <div>
+        <img src="data:image/jpeg;base64,{{ item.foto }}" />
+      </div>
+      <label>{{ item.titulo }}</label>
+      <label>{{ item.descricao }} </label>
+      <label>R$: {{ item.valor }}</label>
+      <button>Pedir</button>
+    </div>
+  </div>
+</section>

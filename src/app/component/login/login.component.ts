@@ -13,7 +13,6 @@ import { Tokenretorno } from 'src/app/models/tokenretorno';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
-  cliente: Cliente;
   token: string;
   mesa: Mesa[];
   public cpf: string;
@@ -27,7 +26,8 @@ export class LoginComponent {
   ngOnInit() {}
 
   submitForm() {
-    this.GetCliente(this.cpf);
+    debugger
+      this.GetCliente(this.cpf);
     setTimeout(() => {
       if (this.mesa.length > 0) {
         alert('Parabuains, Asmuei');
@@ -39,6 +39,7 @@ export class LoginComponent {
 
   //Fazer o unsubscribe :D
   GetCliente(cpf: string) {
+    debugger
     this.tokenService.getToken().subscribe((tokenUser) => {
       this.token = tokenUser.token;
       this.clienteService
