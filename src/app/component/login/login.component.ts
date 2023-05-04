@@ -16,6 +16,7 @@ export class LoginComponent {
   token: string;
   mesa: Mesa[];
   public cpf: string;
+  logado: boolean = false;
 
   constructor(
     private tokenService: TokenService,
@@ -23,23 +24,25 @@ export class LoginComponent {
     private router: Router
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+
+  }
 
   submitForm() {
-    debugger
       this.GetCliente(this.cpf);
     setTimeout(() => {
       if (this.mesa.length > 0) {
         alert('Parabuains, Asmuei');
+        this.logado = true;
       } else {
         alert('Não localizado');
+        this.logado = false;
       }
-    }, 700);
+    }, 500);
   }
 
   //Fazer o unsubscribe :D
   GetCliente(cpf: string) {
-    debugger
     this.tokenService.getToken().subscribe((tokenUser) => {
       this.token = tokenUser.token;
       this.clienteService

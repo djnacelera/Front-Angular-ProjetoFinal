@@ -7,10 +7,11 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import { HttpClientModule } from '@angular/common/http';
 import { MenuComponent } from './component/menu/menu.component';
+import { HeaderComponent } from './component/header/header.component';
 
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, MenuComponent],
+  declarations: [AppComponent, LoginComponent, MenuComponent, HeaderComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
