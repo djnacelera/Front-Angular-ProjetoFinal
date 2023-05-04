@@ -25,7 +25,7 @@ export class MenuComponent {
     this.tokenService.getToken().subscribe((tokenUser) => {
       this.token = tokenUser.token;
       this.pratoService.getPratos(this.token).subscribe((pratos: Prato[]) => {
-        this.pratos = pratos;
+            this.pratos = pratos.filter(prato=>prato.status);
         console.log(this.pratos);
       });
     });

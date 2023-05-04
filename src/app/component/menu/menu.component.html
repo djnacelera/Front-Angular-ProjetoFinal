@@ -1,4 +1,4 @@
-<section>
+<!-- <section>
   <div *ngFor="let item of pratos">
     <div *ngIf="item.status">
       <div>
@@ -10,4 +10,31 @@
       <button>Pedir</button>
     </div>
   </div>
-</section>
+</section> -->
+<div id="blog" class="blog">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="titlepage">
+          <h2>Our Blog</h2>
+          <span>Lorem Ipsum is that it has a more-or-less normal distribution of letters,</span>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12" *ngFor="let item of pratos">
+        <div *ngIf="item.status">
+          <div class="blog-box">
+            <figure> <img src="data:image/jpeg;base64,{{ item.foto }}" />
+            </figure>
+            <div class="travel">
+              <span>{{ item.titulo }}</span>
+            </div>
+            <h3>R$: {{ item.valor }}</h3>
+            <p>{{ item.descricao }} </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

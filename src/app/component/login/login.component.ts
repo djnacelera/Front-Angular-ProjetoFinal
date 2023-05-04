@@ -14,7 +14,7 @@ import { Tokenretorno } from 'src/app/models/tokenretorno';
 })
 export class LoginComponent {
   token: string;
-  mesa: Mesa[];
+  mesas: Mesa[];
   public cpf: string;
   logado: boolean = false;
 
