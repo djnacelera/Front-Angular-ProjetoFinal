@@ -1,5 +1,5 @@
+import { Mesa } from 'src/app/models/mesa';
 import { Observable, lastValueFrom, firstValueFrom, Subscription } from 'rxjs';
-import { Mesa } from './../../models/mesa';
 import { TokenService } from './../../services/token.service';
 import { ClienteService } from 'src/app/services/cliente/cliente.service';
 import { Cliente } from './../../models/cliente';
@@ -20,8 +20,7 @@ export class LoginComponent {
 
   constructor(
     private tokenService: TokenService,
-    private clienteService: ClienteService,
-    private router: Router
+    private clienteService: ClienteService
   ) {}
 
   ngOnInit() {
@@ -31,7 +30,7 @@ export class LoginComponent {
   submitForm() {
       this.GetCliente(this.cpf);
     setTimeout(() => {
-      if (this.mesa.length > 0) {
+      if (this.mesas.length > 0) {
         alert('Parabuains, Asmuei');
         this.logado = true;
       } else {
@@ -48,8 +47,8 @@ export class LoginComponent {
       this.clienteService
         .getClienteByCPF(cpf, this.token)
         .subscribe((mesa: Mesa[]) => {
-          this.mesa = mesa;
-          console.log(this.mesa);
+          this.mesas = mesa;
+          console.log(this.mesas);
         });
     });
   }
