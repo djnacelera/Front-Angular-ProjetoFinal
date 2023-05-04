@@ -1,5 +1,5 @@
+import { Mesa } from 'src/app/models/mesa';
 import { Observable, lastValueFrom, firstValueFrom, Subscription } from 'rxjs';
-import { Mesa } from './../../models/mesa';
 import { TokenService } from './../../services/token.service';
 import { ClienteService } from 'src/app/services/cliente/cliente.service';
 import { Cliente } from './../../models/cliente';
@@ -13,23 +13,21 @@ import { Tokenretorno } from 'src/app/models/tokenretorno';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
-  token: string;
-  mesa: Mesa[];
-  public cpf: string;
+  token: string = '';
+  mesas: Mesa[];
+  public cpf: string = '';
 
   constructor(
     private tokenService: TokenService,
-    private clienteService: ClienteService,
-    private router: Router
+    private clienteService: ClienteService
   ) {}
 
   ngOnInit() {}
 
-  submitForm() {
-    debugger
-      this.GetCliente(this.cpf);
+  async entrar() {
+    this.GetCliente(this.cpf);
     setTimeout(() => {
-      if (this.mesa.length > 0) {
+      if (this.mesas.length > 0) {
         alert('Parabuains, Asmuei');
       } else {
         alert('Não localizado');
@@ -37,16 +35,14 @@ export class LoginComponent {
     }, 700);
   }
 
-  //Fazer o unsubscribe :D
-  GetCliente(cpf: string) {
-    debugger
+  async GetCliente(cpf: string) {
     this.tokenService.getToken().subscribe((tokenUser) => {
       this.token = tokenUser.token;
       this.clienteService
         .getClienteByCPF(cpf, this.token)
         .subscribe((mesa: Mesa[]) => {
-          this.mesa = mesa;
-          console.log(this.mesa);
+          this.mesas = mesa;
+          console.log(this.mesas);
         });
     });
   }

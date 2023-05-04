@@ -4,8 +4,7 @@ import {
   HttpHeaders,
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, throwError, retry, catchError} from 'rxjs';
-
+import { Observable, throwError, retry, catchError } from 'rxjs';
 import { Mesa } from 'src/app/models/mesa';
 
 @Injectable({
@@ -28,7 +27,6 @@ export class ClienteService {
       })
       .pipe(retry(2), catchError(this.handleError));
   }
-
   //Manuseio de erros
   handleError(error: HttpErrorResponse) {
     let errorMessage = '';

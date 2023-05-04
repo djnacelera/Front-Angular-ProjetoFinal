@@ -21,7 +21,7 @@ export class TokenService {
   httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) }
 
   //Chamada para obter token
-   getToken(): Observable<Tokenretorno> {
+    getToken(): Observable<Tokenretorno> {
     return this.httpClient.post<Tokenretorno>(this.url, JSON.stringify(this.token), this.httpOptions).pipe(
       retry(2), catchError(this.handleError)
     )
