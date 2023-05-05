@@ -1,3 +1,4 @@
+
 export interface Prato {
   id: string;
   titulo: string;

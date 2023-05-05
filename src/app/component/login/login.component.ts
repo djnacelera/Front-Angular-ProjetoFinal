@@ -1,3 +1,4 @@
+import { TransporteServiceService } from './../../services/transporte/transporte-service.service';
 import { Mesa } from 'src/app/models/mesa';
 import { Observable, lastValueFrom, firstValueFrom, Subscription } from 'rxjs';
 import { TokenService } from './../../services/token.service';
@@ -20,18 +21,24 @@ export class LoginComponent {
 
   constructor(
     private tokenService: TokenService,
-    private clienteService: ClienteService
+    private clienteService: ClienteService,
+    private transporte: TransporteServiceService
   ) {}
 
   ngOnInit() {
 
   }
 
+  enviarObjeto() {
+    this.transporte.setObjeto(this.mesas);
+  }
+
   submitForm() {
       this.GetCliente(this.cpf);
-    setTimeout(() => {
-      if (this.mesas.length > 0) {
-        alert('Parabuains, Asmuei');
+      setTimeout(() => {
+        if (this.mesas.length > 0) {
+          alert('Parabuains, Asmuei');
+          this.enviarObjeto();
         this.logado = true;
       } else {
         alert('Não localizado');
