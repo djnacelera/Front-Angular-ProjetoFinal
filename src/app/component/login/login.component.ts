@@ -44,7 +44,7 @@ export class LoginComponent {
         alert('Não localizado');
         this.logado = false;
       }
-    }, 500);
+    }, 800);
   }
 
   //Fazer o unsubscribe :D

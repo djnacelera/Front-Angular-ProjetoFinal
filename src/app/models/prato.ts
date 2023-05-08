@@ -6,4 +6,7 @@ export interface Prato {
   foto: string;
   valor: number;
   status:boolean;
+  quantidade:string;
 }
+
+

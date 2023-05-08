@@ -1,5 +1,5 @@
 import { Mesa } from 'src/app/models/mesa';
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { Prato } from 'src/app/models/prato';
 import { Pedidos } from 'src/app/models/pedidos';
 import { PratoService } from 'src/app/services/prato/prato.service';
@@ -7,8 +7,6 @@ import { TokenService } from 'src/app/services/token.service';
 import { PedidoService } from 'src/app/services/pedido/pedido.service';
 import { RealizarPedido } from 'src/app/models/realizar-pedido';
 import { TransporteServiceService } from './../../services/transporte/transporte-service.service';
-
-
 
 @Component({
   selector: 'app-menu',
@@ -23,14 +21,15 @@ export class MenuComponent {
   mesas: Mesa[];
   idMesa: string = '013ed28f-d7cf-4afc-976c-3196851ad772';
   cpf: string = '11111111111';
+  quantidade: number;
+  //@ViewChild('quantidadeInput', {static: false}) quantidadeInput: ElementRef;
 
   realizarPedido: RealizarPedido = {
-    mesaid: this.idMesa,
-    pratoid: 'C41B0305-14F3-4E49-90A4-08DB3C65CB9C',
-    cpf: this.cpf,
-    quantidade: 4,
+    mesaid: '',
+    pratoid: '',
+    cpf: '',
+    quantidade: 0,
   };
-
 
   constructor(
     private tokenService: TokenService,
@@ -39,26 +38,36 @@ export class MenuComponent {
     private transporte: TransporteServiceService
   ) {}
 
-
   ngOnInit() {
-     this.GetPratos();
+    this.GetPratos();
   }
 
-  // ngOnInit() {
-  //   this.transporte.getObjeto().subscribe(obj => {
-  //     this.mesas = obj;
-  //   });
-  // }
-
-   RealizarPedido(){
-     this.postPedido(this.realizarPedido);
+  TrazerDados() {
+    this.transporte.getObjeto().subscribe((obj) => {
+      this.mesas = obj;
+      console.log(this.mesas);
+    });
   }
 
-  postPedido(pedido: RealizarPedido){
+  RealizarPedido(id: string) {
+    console.log(Number(this.pratos.find((a) => a.id === id)?.quantidade));
+    this.quantidade=Number(this.pratos.find((a) => a.id === id)?.quantidade)
+    this.TrazerDados();
+    setTimeout(() => {
+      console.log(this.mesas[0].clientes.cpf);
+      this.realizarPedido.cpf = this.mesas[0].clientes.cpf.toString();
+      this.realizarPedido.mesaid = this.mesas[0].id.toString();
+      this.realizarPedido.pratoid = id;
+      this.realizarPedido.quantidade = this.quantidade;
+      this.postPedido(this.realizarPedido);
+    }, 1000);
+  }
+
+  postPedido(pedido: RealizarPedido) {
     this.tokenService.getToken().subscribe((tokenUser) => {
       this.token = tokenUser.token;
       this.pedidosService
-        .postPedido(this.realizarPedido, this.token)
+        .postPedido(pedido, this.token)
         .subscribe((pedidos: Pedidos) => {
           this.pedido = pedidos;
           console.log(this.pedido);
@@ -78,15 +87,13 @@ export class MenuComponent {
     });
   }
 
-
   GetPratos() {
     this.tokenService.getToken().subscribe((tokenUser) => {
       this.token = tokenUser.token;
       this.pratoService.getPratos(this.token).subscribe((pratos: Prato[]) => {
-            this.pratos = pratos.filter(prato=>prato.status);
+        this.pratos = pratos.filter((prato) => prato.status);
         console.log(this.pratos);
       });
     });
   }
-
 }

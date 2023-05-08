@@ -31,7 +31,8 @@
           </div>
           <h3>R$: {{ item.valor }}</h3>
           <p>{{ item.descricao }} </p>
-          <button (onclick)="RealizarPedido()"></button>
+          <input type="number"  name="quantidade" [value]="item.quantidade" (change)="item.quantidade = quantidadeInput.value" #quantidadeInput />
+          <button (click)="RealizarPedido(item.id)">Pedido</button>
         </div>
       </div>
     </div>
