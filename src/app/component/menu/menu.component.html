@@ -16,23 +16,30 @@
     <div class="row">
       <div class="col-md-12">
         <div class="titlepage">
-          <h2>Our Blog</h2>
-          <span>Lorem Ipsum is that it has a more-or-less normal distribution of letters,</span>
+          <h2>Menu Master</h2>
+          <span>Foi desenvolvido para os clientes realizarem os pedidos</span>
         </div>
       </div>
     </div>
-    <div class="row">
-      <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12" *ngFor="let item of pratos">
-        <div class="blog-box">
-          <figure> <img src="data:image/jpeg;base64,{{ item.foto }}" />
-          </figure>
-          <div class="travel">
-            <span>{{ item.titulo }}</span>
+    <div class="ContainerCard">
+      <div *ngFor="let item of pratos">
+        <div class="card text-white text-center mb-3" style="background-color:rgb(32, 75, 107); max-width: 18rem;">
+          <div class="card-header" style="background-color:rgb(37,88,126)"> {{ item.titulo }}</div>
+          <div class="blog-box" style="text-align: -webkit-center;">
+            <br>
+            <figure> <img src="data:image/jpeg;base64,{{ item.foto }}" style="width: 100px; height: 80px;" />
+            </figure>
+            <!-- <div class="travel">
+              <span>{{ item.titulo }}</span>
+            </div> -->
+            <br>
+            <p>{{ item.descricao }} </p>
+            <h5 style="color: mediumseagreen;">R$: {{ item.valor }}</h5>
+            <input type="number" name="quantidade" [value]="item.quantidade"
+              (change)="item.quantidade = quantidadeInput.value" #quantidadeInput class="form-control"
+              style="width: 80%; height: 10px;" />
+            <button (click)="RealizarPedido(item.id)" class="btn btn-secondary">Pedido</button>
           </div>
-          <h3>R$: {{ item.valor }}</h3>
-          <p>{{ item.descricao }} </p>
-          <input type="number"  name="quantidade" [value]="item.quantidade" (change)="item.quantidade = quantidadeInput.value" #quantidadeInput />
-          <button (click)="RealizarPedido(item.id)">Pedido</button>
         </div>
       </div>
     </div>
