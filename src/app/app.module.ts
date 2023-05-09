@@ -8,11 +8,12 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { MenuComponent } from './component/menu/menu.component';
 import { HeaderComponent } from './component/header/header.component';
+import { PedidosComponent } from './component/pedidos/pedidos.component';
 import { FooterComponent } from './component/footer/footer.component';
 
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, MenuComponent, HeaderComponent, FooterComponent],
+  declarations: [AppComponent, LoginComponent, MenuComponent, HeaderComponent, PedidosComponent, FooterComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -23,4 +24,4 @@ import { FooterComponent } from './component/footer/footer.component';
   providers: [],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

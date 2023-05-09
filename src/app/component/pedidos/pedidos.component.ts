@@ -16,15 +16,10 @@ export class PedidosComponent {
   pedidos: Pedidos[];
   pedido: Pedidos;
   mesas: Mesa[];
-  idMesa: string = '013ed28f-d7cf-4afc-976c-3196851ad772';
-  cpf: string = '11111111111';
+  idMesa: string = '';
+  cpf: string = '';
 
-  realizarPedido: RealizarPedido = {
-    mesaid: this.idMesa,
-    pratoid: 'C41B0305-14F3-4E49-90A4-08DB3C65CB9C',
-    cpf: this.cpf,
-    quantidade: 4,
-  };
+
 
   constructor(
     private tokenService: TokenService,
@@ -33,13 +28,41 @@ export class PedidosComponent {
   ) {}
 
   ngOnInit() {
+    this.TrazerDados();
+
+  }
+
+  TrazerDados() {
+
     this.transporte.getObjeto().subscribe((obj) => {
       this.mesas = obj;
+      this.cpf = this.mesas[0].clientes.cpf;
+      this.idMesa = this.mesas[0].id;
+      console.log(this.mesas);
+      this.GetPedidosCPfMesa();
+    });
+    setTimeout(()=>{
+      this.GetPedidosCPfMesa();
+    },800)
+
+  }
+
+  Cancelar(id: string) {
+    this.tokenService.getToken().subscribe((tokenUser) => {
+      this.token = tokenUser.token;
+      debugger
+      this.pedidosService
+        .cancelarPedido(id,tokenUser.token)
+        .subscribe((pedidos: Pedidos) => {
+          this.pedido = pedidos;
+          console.log(this.pedidos);
+          this.GetPedidosCPfMesa()
+        });
     });
   }
-  Cancelar(id: string) {}
 
-  GetPeidosCPfMesa() {
+  GetPedidosCPfMesa() {
+    console.log('Tazendo pedidos')
     this.tokenService.getToken().subscribe((tokenUser) => {
       this.token = tokenUser.token;
       this.pedidosService

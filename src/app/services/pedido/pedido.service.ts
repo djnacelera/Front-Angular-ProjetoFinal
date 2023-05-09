@@ -22,9 +22,18 @@ export class PedidoService {
     })
     .pipe(retry(2), catchError(this.handleError));
   }
-  
+
   postPedido(pedido: RealizarPedido, token: string): Observable<Pedidos> {
     return this.httpClient.post<Pedidos>(`${this.url}Incluir`, pedido, {
+      headers: new HttpHeaders({
+        Authorization: 'Bearer ' + token,
+        'Content-Type': 'application/json',
+      }),
+    }).pipe(retry(2), catchError(this.handleError));
+  }
+
+  cancelarPedido(id:string, token: string): Observable<Pedidos> {
+    return this.httpClient.put<Pedidos>(`${this.url}Cancelado/${id}`,null, {
       headers: new HttpHeaders({
         Authorization: 'Bearer ' + token,
         'Content-Type': 'application/json',
