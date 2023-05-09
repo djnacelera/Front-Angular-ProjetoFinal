@@ -8,10 +8,11 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { MenuComponent } from './component/menu/menu.component';
 import { HeaderComponent } from './component/header/header.component';
+import { PedidosComponent } from './component/pedidos/pedidos.component';
 
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, MenuComponent, HeaderComponent],
+  declarations: [AppComponent, LoginComponent, MenuComponent, HeaderComponent, PedidosComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
