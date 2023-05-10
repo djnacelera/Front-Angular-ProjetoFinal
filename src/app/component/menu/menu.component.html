@@ -11,6 +11,7 @@
     </div>
   </div>
 </section> -->
+<app-header></app-header>
 <div id="blog" class="blog">
   <div class="container">
     <div class="row">
@@ -36,11 +37,13 @@
               <span>{{ item.titulo }}</span>
             </div> -->
             <p>{{ item.descricao }} </p>
-            <h5 style="color: mediumseagreen;">R$: {{ item.valor }}</h5>
-            <input type="number" name="quantidade" [value]="item.quantidade"
-              (change)="item.quantidade = quantidadeInput.value" #quantidadeInput class="form-control"
-              style="width: 80%; height: 10px;" />
-            <button (click)="RealizarPedido(item.id)" class="btn btn-secondary">Pedido</button>
+            <p>R$: {{ item.valor }}</p>
+            <div *ngIf="logado;">
+              <input type="number" name="quantidade" [value]="item.quantidade"
+                (change)="item.quantidade = quantidadeInput.value" #quantidadeInput class="form-control"
+                style="width: 80%; height: 10px;" />
+              <button (click)="RealizarPedido(item.id)" class="btn btn-secondary">Pedido</button>
+            </div>
           </div>
         </div>
       </div>

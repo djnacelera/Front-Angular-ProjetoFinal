@@ -26,7 +26,8 @@
         </div> -->
         <br>
         <p>Qtd: {{ item.quantidade }} </p>
-        <h5 style="color: mediumseagreen;">R$: {{ item.pratos.valor }}</h5>
+        <p>Status: {{ item.statusPedido }}</p>
+        <!-- <h5 style="color: mediumseagreen;">R$: {{ item.pratos.valor }}</h5> -->
         <button (click)="Cancelar(item.id)" class="btn btn-secondary">Cancelar</button>
       </div>
     </div>

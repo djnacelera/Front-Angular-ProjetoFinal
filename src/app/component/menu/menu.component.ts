@@ -1,5 +1,5 @@
 import { Mesa } from 'src/app/models/mesa';
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, SimpleChanges, OnChanges, ViewChild } from '@angular/core';
 import { Prato } from 'src/app/models/prato';
 import { Pedidos } from 'src/app/models/pedidos';
 import { PratoService } from 'src/app/services/prato/prato.service';
@@ -7,13 +7,14 @@ import { TokenService } from 'src/app/services/token.service';
 import { PedidoService } from 'src/app/services/pedido/pedido.service';
 import { RealizarPedido } from 'src/app/models/realizar-pedido';
 import { TransporteServiceService } from './../../services/transporte/transporte-service.service';
+import { LoaderService } from 'src/app/services/loader.service';
 
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.css'],
 })
-export class MenuComponent {
+export class MenuComponent implements OnChanges {
   token: string;
   pratos: Prato[];
   pedidos: Pedidos[];
@@ -22,6 +23,7 @@ export class MenuComponent {
   idMesa: string = '013ed28f-d7cf-4afc-976c-3196851ad772';
   cpf: string = '11111111111';
   quantidade: number;
+  logado: boolean = false;
   //@ViewChild('quantidadeInput', {static: false}) quantidadeInput: ElementRef;
 
   realizarPedido: RealizarPedido = {
@@ -35,11 +37,29 @@ export class MenuComponent {
     private tokenService: TokenService,
     private pratoService: PratoService,
     private pedidosService: PedidoService,
-    private transporte: TransporteServiceService
+    private transporte: TransporteServiceService,
+    public loaderService: LoaderService
   ) { }
 
   ngOnInit() {
     this.GetPratos();
+    setInterval(() => {
+      this.VerificaLogado();
+    }, 5000);
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    this.VerificaLogado();
+  }
+
+  VerificaLogado() {
+    this.TrazerDados();
+    if (this.mesas.length > 0) {
+      this.logado = true;
+    } else {
+      this.logado = false;
+    }
+    console.log(this.logado);
   }
 
   TrazerDados() {
@@ -50,6 +70,7 @@ export class MenuComponent {
   }
 
   RealizarPedido(id: string) {
+    this.loaderService.show();
     console.log(Number(this.pratos.find((a) => a.id === id)?.quantidade));
     this.quantidade = Number(this.pratos.find((a) => a.id === id)?.quantidade)
     this.TrazerDados();
@@ -60,6 +81,7 @@ export class MenuComponent {
       this.realizarPedido.pratoid = id;
       this.realizarPedido.quantidade = this.quantidade;
       this.postPedido(this.realizarPedido);
+      this.loaderService.hide();
     }, 1000);
   }
 

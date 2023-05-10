@@ -5,6 +5,7 @@ import { PedidoService } from 'src/app/services/pedido/pedido.service';
 import { TokenService } from 'src/app/services/token.service';
 import { TransporteServiceService } from './../../services/transporte/transporte-service.service';
 import { Mesa } from 'src/app/models/mesa';
+import { LoaderService } from 'src/app/services/loader.service';
 
 @Component({
   selector: 'app-pedidos',
@@ -24,7 +25,8 @@ export class PedidosComponent {
   constructor(
     private tokenService: TokenService,
     private pedidosService: PedidoService,
-    private transporte: TransporteServiceService
+    private transporte: TransporteServiceService,
+    public loaderService: LoaderService
   ) { }
 
   ngOnInit() {
@@ -50,6 +52,7 @@ export class PedidosComponent {
   }
 
   Cancelar(id: string) {
+    this.loaderService.show();
     this.tokenService.getToken().subscribe((tokenUser) => {
       this.token = tokenUser.token;
       debugger
@@ -59,6 +62,7 @@ export class PedidosComponent {
           this.pedido = pedidos;
           console.log(this.pedidos);
           this.GetPedidosCPfMesa();
+          this.loaderService.hide();
           alert("Pedido cancelado com sucesso!")
         });
     });

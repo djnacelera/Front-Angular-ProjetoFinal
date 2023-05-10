@@ -41,6 +41,7 @@ export class LoginComponent {
         alert('Logado com sucesso');
         this.enviarObjeto();
         this.logado = true;
+        // this.logadoService.setLogado(true);
       } else {
         this.loaderService.hide();
         alert('Não localizado');
