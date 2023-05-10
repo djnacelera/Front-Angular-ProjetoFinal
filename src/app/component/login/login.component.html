@@ -7,11 +7,8 @@
   <div class="col" id="logado" *ngIf="logado">
     <div class="col-sm-12">
       <div *ngFor="let item of mesas">
-        <label style="color: white;" for="cpf">{{item.clientes.cpf}}</label>
-        <br />
         <label style="color: white;" for="nome">{{item.clientes.nome}}</label>
       </div>
     </div>
   </div>
 </form>
-

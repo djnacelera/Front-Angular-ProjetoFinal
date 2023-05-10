@@ -21,8 +21,8 @@ export class LoginComponent {
     private tokenService: TokenService,
     private clienteService: ClienteService,
     private transporte: TransporteServiceService,
-    public loaderService:LoaderService
-  ) {}
+    public loaderService: LoaderService
+  ) { }
 
   ngOnInit() {
 
@@ -34,13 +34,14 @@ export class LoginComponent {
 
   submitForm() {
     this.loaderService.show();
-      this.GetCliente(this.cpf);
-      setTimeout(() => {
-        if (this.mesas.length > 0) {
-          this.loaderService.hide();
-          alert('Logado com sucesso');
-          this.enviarObjeto();
+    this.GetCliente(this.cpf);
+    setTimeout(() => {
+      if (this.mesas.length > 0) {
+        this.loaderService.hide();
+        alert('Logado com sucesso');
+        this.enviarObjeto();
         this.logado = true;
+        // this.logadoService.setLogado(true);
       } else {
         this.loaderService.hide();
         alert('Não localizado');

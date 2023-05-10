@@ -1,4 +1,4 @@
-<div class="" *ngFor="let item of pedidos">
+<!-- <div class="" *ngFor="let item of pedidos">
   <div class="blog-box">
     <figure><img src="data:image/jpeg;base64,{{ item.pratos.foto }}" /></figure>
     <div class="travel">
@@ -8,4 +8,29 @@
     <p>{{ item.quantidade }}</p>
     <button (click)="Cancelar(item.id)">Cancelar</button>
   </div>
+</div> -->
+
+
+
+<div class="ContainerCard">
+  <div *ngFor="let item of pedidos">
+    <div class="card text-white text-center mb-5"
+      style="background-color:rgb(32, 75, 107); max-width: 18rem; max-height: 365px;">
+      <div class="card-header" style="background-color:rgb(37,88,126)"> {{ item.pratos.titulo }}</div>
+      <div class="blog-box" style="text-align: -webkit-center; width: 260px;">
+        <br>
+        <img src="data:image/jpeg;base64,{{ item.pratos.foto }}" class="imgCard" />
+
+        <!-- <div class="travel">
+          <span>{{ item.titulo }}</span>
+        </div> -->
+        <br>
+        <p>Qtd: {{ item.quantidade }} </p>
+        <p>Status: {{ item.statusPedido }}</p>
+        <!-- <h5 style="color: mediumseagreen;">R$: {{ item.pratos.valor }}</h5> -->
+        <button (click)="Cancelar(item.id)" class="btn btn-secondary">Cancelar</button>
+      </div>
+    </div>
+  </div>
 </div>
+<hr>

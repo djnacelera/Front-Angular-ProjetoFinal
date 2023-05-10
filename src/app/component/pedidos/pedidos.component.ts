@@ -5,6 +5,7 @@ import { PedidoService } from 'src/app/services/pedido/pedido.service';
 import { TokenService } from 'src/app/services/token.service';
 import { TransporteServiceService } from './../../services/transporte/transporte-service.service';
 import { Mesa } from 'src/app/models/mesa';
+import { LoaderService } from 'src/app/services/loader.service';
 
 @Component({
   selector: 'app-pedidos',
@@ -24,11 +25,14 @@ export class PedidosComponent {
   constructor(
     private tokenService: TokenService,
     private pedidosService: PedidoService,
-    private transporte: TransporteServiceService
-  ) {}
+    private transporte: TransporteServiceService,
+    public loaderService: LoaderService
+  ) { }
 
   ngOnInit() {
-    this.TrazerDados();
+    setInterval(() => {
+      this.TrazerDados();
+    }, 2000)
 
   }
 
@@ -41,22 +45,25 @@ export class PedidosComponent {
       console.log(this.mesas);
       this.GetPedidosCPfMesa();
     });
-    setTimeout(()=>{
+    setTimeout(() => {
       this.GetPedidosCPfMesa();
-    },800)
+    }, 800)
 
   }
 
   Cancelar(id: string) {
+    this.loaderService.show();
     this.tokenService.getToken().subscribe((tokenUser) => {
       this.token = tokenUser.token;
       debugger
       this.pedidosService
-        .cancelarPedido(id,tokenUser.token)
+        .cancelarPedido(id, tokenUser.token)
         .subscribe((pedidos: Pedidos) => {
           this.pedido = pedidos;
           console.log(this.pedidos);
-          this.GetPedidosCPfMesa()
+          this.GetPedidosCPfMesa();
+          this.loaderService.hide();
+          alert("Pedido cancelado com sucesso!")
         });
     });
   }

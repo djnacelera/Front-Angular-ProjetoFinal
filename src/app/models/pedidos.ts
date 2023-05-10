@@ -3,16 +3,15 @@ import { Prato } from "./prato";
 
 export interface Pedidos {
   id: string;
-  cpf:string;
+  cpf: string;
   quantidade: number;
-  statuspedido: statusPedido;
+  statusPedido: statusPedido;
   dtRecebimento: Date;
-  pratos:Prato;
+  pratos: Prato;
   mesas: Mesa;
 }
 
-enum statusPedido
-{
+enum statusPedido {
   Recebido = 1,
   Preparando = 2,
   Disponivel = 3,

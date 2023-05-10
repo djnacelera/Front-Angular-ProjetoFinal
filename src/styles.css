@@ -162,10 +162,10 @@ a,
 	transition: all .3s ease-in-out;
 }
 
-img {
+/* img {
 	max-width: 100px;
 	height: auto;
-}
+}*/
 
 :focus {
 	outline: 0;
@@ -462,6 +462,8 @@ a.readmore_bt {
 
 .logo {
 	float: left;
+	max-width: 100px;
+	height: auto;
 }
 
 nav.main-menu {
@@ -1815,7 +1817,7 @@ img.zoom {
 
 .blog {
 	background-color: #efefef;
-	padding: 90px 0px;
+	padding: 30px 0px 120px 0;
 }
 
 .blog .titlepage {
@@ -1998,8 +2000,13 @@ img.zoom {
 }
 
 .footer {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 95px;
 	background: #DE690C;
-	padding-top: 0px;
+	padding-top: 0;
 }
 
 .footer .address h3 {
@@ -2256,3 +2263,31 @@ a:hover {
 		justify-content: center;
 	}
 }
+
+.boxWhite {
+	margin: 15px 0;
+	background-color: white;
+	padding: 10px;
+	border-radius: 5px;
+	text-align-last: center;
+}
+
+.imgCard {
+	width: 200px;
+	height: 150px;
+}
+
+/* .c-loader {
+	animation: is-rotating 1s infinite;
+	border: 6px solid #e5e5e5;
+	border-radius: 50%;
+	border-top-color: #DE690C;
+	height: 50px;
+	width: 50px;
+}
+
+@keyframes is-rotating {
+	to {
+		transform: rotate(1turn);
+	}
+} */
