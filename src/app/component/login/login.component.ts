@@ -20,7 +20,7 @@ export class LoginComponent {
     private tokenService: TokenService,
     private clienteService: ClienteService,
     private transporte: TransporteServiceService
-  ) {}
+  ) { }
 
   ngOnInit() {
 
@@ -31,11 +31,11 @@ export class LoginComponent {
   }
 
   submitForm() {
-      this.GetCliente(this.cpf);
-      setTimeout(() => {
-        if (this.mesas.length > 0) {
-          alert('Parabuains, Asmuei');
-          this.enviarObjeto();
+    this.GetCliente(this.cpf);
+    setTimeout(() => {
+      if (this.mesas.length > 0) {
+        alert('Login efetuado com sucesso');
+        this.enviarObjeto();
         this.logado = true;
       } else {
         alert('Não localizado');

@@ -21,18 +21,20 @@
         </div>
       </div>
     </div>
+    <div>
+      <app-pedidos></app-pedidos>
+    </div>
     <div class="ContainerCard">
       <div *ngFor="let item of pratos">
-        <div class="card text-white text-center mb-3" style="background-color:rgb(32, 75, 107); max-width: 18rem;">
+        <div class="card text-white text-center mb-3"
+          style="background-color:rgb(32, 75, 107); max-width: 18rem; max-height: 365px;">
           <div class="card-header" style="background-color:rgb(37,88,126)"> {{ item.titulo }}</div>
           <div class="blog-box" style="text-align: -webkit-center;">
-            <br>
-            <figure> <img src="data:image/jpeg;base64,{{ item.foto }}" style="width: 100px; height: 80px;" />
+            <figure> <img src="data:image/jpeg;base64,{{ item.foto }}" class="imgCard" />
             </figure>
             <!-- <div class="travel">
               <span>{{ item.titulo }}</span>
             </div> -->
-            <br>
             <p>{{ item.descricao }} </p>
             <h5 style="color: mediumseagreen;">R$: {{ item.valor }}</h5>
             <input type="number" name="quantidade" [value]="item.quantidade"

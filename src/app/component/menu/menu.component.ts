@@ -36,7 +36,7 @@ export class MenuComponent {
     private pratoService: PratoService,
     private pedidosService: PedidoService,
     private transporte: TransporteServiceService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.GetPratos();
@@ -51,7 +51,7 @@ export class MenuComponent {
 
   RealizarPedido(id: string) {
     console.log(Number(this.pratos.find((a) => a.id === id)?.quantidade));
-    this.quantidade=Number(this.pratos.find((a) => a.id === id)?.quantidade)
+    this.quantidade = Number(this.pratos.find((a) => a.id === id)?.quantidade)
     this.TrazerDados();
     setTimeout(() => {
       console.log(this.mesas[0].clientes.cpf);
@@ -71,6 +71,7 @@ export class MenuComponent {
         .subscribe((pedidos: Pedidos) => {
           this.pedido = pedidos;
           console.log(this.pedido);
+          alert("Pedido realizado com sucesso!")
         });
     });
   }

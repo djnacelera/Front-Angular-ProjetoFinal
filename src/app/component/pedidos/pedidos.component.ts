@@ -25,10 +25,12 @@ export class PedidosComponent {
     private tokenService: TokenService,
     private pedidosService: PedidoService,
     private transporte: TransporteServiceService
-  ) {}
+  ) { }
 
   ngOnInit() {
-    this.TrazerDados();
+    setInterval(() => {
+      this.TrazerDados();
+    }, 2000)
 
   }
 
@@ -41,9 +43,9 @@ export class PedidosComponent {
       console.log(this.mesas);
       this.GetPedidosCPfMesa();
     });
-    setTimeout(()=>{
+    setTimeout(() => {
       this.GetPedidosCPfMesa();
-    },800)
+    }, 800)
 
   }
 
@@ -52,11 +54,12 @@ export class PedidosComponent {
       this.token = tokenUser.token;
       debugger
       this.pedidosService
-        .cancelarPedido(id,tokenUser.token)
+        .cancelarPedido(id, tokenUser.token)
         .subscribe((pedidos: Pedidos) => {
           this.pedido = pedidos;
           console.log(this.pedidos);
-          this.GetPedidosCPfMesa()
+          this.GetPedidosCPfMesa();
+          alert("Pedido cancelado com sucesso!")
         });
     });
   }
