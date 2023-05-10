@@ -3,6 +3,7 @@ import { Mesa } from 'src/app/models/mesa';
 import { TokenService } from './../../services/token.service';
 import { ClienteService } from 'src/app/services/cliente/cliente.service';
 import { Component } from '@angular/core';
+import { LoaderService } from 'src/app/services/loader.service';
 
 
 @Component({
@@ -19,7 +20,8 @@ export class LoginComponent {
   constructor(
     private tokenService: TokenService,
     private clienteService: ClienteService,
-    private transporte: TransporteServiceService
+    private transporte: TransporteServiceService,
+    public loaderService: LoaderService
   ) { }
 
   ngOnInit() {
@@ -31,13 +33,16 @@ export class LoginComponent {
   }
 
   submitForm() {
+    this.loaderService.show();
     this.GetCliente(this.cpf);
     setTimeout(() => {
       if (this.mesas.length > 0) {
-        alert('Login efetuado com sucesso');
+        this.loaderService.hide();
+        alert('Logado com sucesso');
         this.enviarObjeto();
         this.logado = true;
       } else {
+        this.loaderService.hide();
         alert('Não localizado');
         this.logado = false;
       }

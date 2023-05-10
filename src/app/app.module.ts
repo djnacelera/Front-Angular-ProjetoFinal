@@ -10,16 +10,21 @@ import { MenuComponent } from './component/menu/menu.component';
 import { HeaderComponent } from './component/header/header.component';
 import { PedidosComponent } from './component/pedidos/pedidos.component';
 import { FooterComponent } from './component/footer/footer.component';
+import { LoaderComponent } from './loader/loader.component';
+import { NgxLoadingModule } from 'ngx-loading';
 
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, MenuComponent, HeaderComponent, PedidosComponent, FooterComponent],
+  declarations: [AppComponent, LoginComponent, MenuComponent, HeaderComponent, PedidosComponent, FooterComponent, LoaderComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
+    NgxLoadingModule.forRoot({
+      fullScreenBackdrop: true
+    })
   ],
   providers: [],
   bootstrap: [AppComponent],
