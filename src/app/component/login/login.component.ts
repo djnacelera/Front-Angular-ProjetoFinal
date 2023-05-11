@@ -58,7 +58,7 @@ export class LoginComponent {
         .getClienteByCPF(cpf, this.token)
         .subscribe((mesa: Mesa[]) => {
           this.mesas = mesa;
-          console.log(this.mesas);
+
         });
     });
   }
